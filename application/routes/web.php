@@ -37,6 +37,10 @@ Route::get('customer/{id}', function($id){
     echo "</pre>";
     echo "hello my name is " . $customer->name . "\n";
 
+    $userss = DB::table('customers')->get();
+
+    echo json_encode($users);
+
     return response()
         ->json(['name' => $customer->name, 'id' => $customer->id,'email'=> $customer->email]);
 
