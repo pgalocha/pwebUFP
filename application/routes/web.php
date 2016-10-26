@@ -19,16 +19,26 @@ Route::get('hello/{name}', function($name){
     echo 'Hello again mrs '. $name;
 });
 
+Route::get('customer', function () {
+    $users = DB::table('customers')->get();
+    echo json_encode($users);
+});
+
+
 Route::get('customer/{id}', function($id){
     $users = DB::table('customers')->get();
     foreach ($users as $user) {
         echo $user->name . " " . $user->id . " ". $user->email ."\n";
     }
 
+
     $nome="Pedro";
     $email = DB::table('customers')->where('name', $nome)->value('email');
 
     echo $email;
+
+    //$userss = DB::table('customers')->where('id',$id)->first();
+    //return json_encode($userss);
 
      $customer= App\Customer::find($id);
 
