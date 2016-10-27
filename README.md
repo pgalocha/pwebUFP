@@ -7,8 +7,8 @@ This is the repo for my implementation of a WEB app and it's respective content.
 
 ## Description
 - App
-  -A web portal where you can book your own sportive field to a specific date.
+  - A web portal where you can book your own sportive field to a specific date.
   
 ## Initial functionalities
 - Clients
- -You must sign in , to have the possibility of making a online reserve.
+ - You must sign in , to have the possibility of making a online reserve.
