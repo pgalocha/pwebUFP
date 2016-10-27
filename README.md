@@ -10,5 +10,5 @@ This is the repo for my implementation of a WEB app and it's respective content.
   -A web portal where you can book your own sportive field to a specific date.
   
 ## Initial functionalities
--Clients
+- Clients
  -You must sign in , to have the possibility of making a online reserve.
