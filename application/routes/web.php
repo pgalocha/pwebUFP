@@ -15,6 +15,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+/*
+Route::get('home', function (){
+
+echo "Welcome Home.";
+
+});
+*/
+
 Route::get('hello/{name}', function($name){
     echo "<p><font size='3' color='red'>$name</font></p>";
     echo "<p1>Hello again mrs $name </p1>";
@@ -74,3 +82,12 @@ Route::get('mypage', function(){
     );
    return view('mypage', $data);
 });
+
+Route::get('testevideo',function(){
+
+return view('testevideo');
+});
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
