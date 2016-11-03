@@ -8,7 +8,3 @@
     @yield('teste');
 
 
-</body>
-</html>
-
-

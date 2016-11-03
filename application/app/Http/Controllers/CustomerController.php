@@ -15,6 +15,7 @@ class CustomerController extends Controller
         $customer = Customer::find($id);
         $orders = $customer->orders;
         foreach ($orders as $order){
+            echo $customer->name;
             echo $order->name . "</br>";
         }
     }

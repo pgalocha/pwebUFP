@@ -83,6 +83,12 @@ Route::get('mypage', function(){
    return view('mypage', $data);
 });
 
+Route::get('teste',function (){
+    return view('teste');
+});
+
+
+
 Route::get('testevideo',function(){
 
 return view('testevideo');

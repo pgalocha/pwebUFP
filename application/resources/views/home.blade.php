@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+
 @section('content')
 <div class="container">
     <div class="row">
@@ -10,13 +11,12 @@
                 <div class="panel-body">
                     You are logged in
                     @if(Auth::user())
-                       {{ Auth::user()->email}}
+                       {{ Auth::user()->name}}
+                        @php(Route::get(''))
                         @endif
                     !
                 </div>
-
-                <button type="submit" class="btn btn-primary">
-                    Voltar ao HomePage!
+                <a href="http://localhost:8000/"> Voltar ao HomePage!</a>
                 </button>
             </div>
         </div>

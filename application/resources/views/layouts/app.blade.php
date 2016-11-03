@@ -66,10 +66,10 @@
                                             Logout
                                         </a>
 
-                                        <a href="{{ url('/mypage') }}"
+                                        <a href="http://localhost:8000/mypage"
                                            onclick="event.preventDefault();
                                                      document.getElementById('gotopage').submit();">
-                                            MypageExample
+                                            backtopage
                                         </a>
 
                                         <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
