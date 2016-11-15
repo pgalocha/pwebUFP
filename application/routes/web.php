@@ -10,6 +10,7 @@
 | to using a Closure or controller method. Build something great!
 |
 */
+use Illuminate\Http\Request;
 
 Route::get('/', function () {
     return view('welcome');
@@ -36,7 +37,6 @@ Route::get('customer', function () {
 Route::get('get_customer/{id}', 'CustomerController@get_customer');
 
 Route::get('orders','OrderController@index');
-
 
 Route::get('customer/{id}', 'CustomerController@show');
 /*
@@ -87,7 +87,9 @@ Route::get('teste',function (){
     return view('teste');
 });
 
-
+Route::get('shufle',function (){
+    return view('galocha');
+});
 
 Route::get('testevideo',function(){
 
@@ -97,3 +99,21 @@ return view('testevideo');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+Route::get('/registuser','HomeController@regist');
+
+Route::get('/form',['middleware' => 'admin' ,function(){
+   if( Auth::user()->isAdmin()){
+       return view('form');
+   }
+
+}]);
+
+Route::get('/admin',['middleware' => 'admin' ,function(){
+    return view('form');
+}]);
+Route::post('/admin',function (Request $request){
+    $name = $request->all();
+    $us = json_encode($name);
+    print_r($us);
+});

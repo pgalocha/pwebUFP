@@ -21,10 +21,19 @@ a[class*="entypo-"]:before {
     width: 12em;
 }
 
+.frame{
+    position: relative;
+    height: 20em;
+    width: 40em;
+}
+
+.footer{
+    background: #1b1818;
+    height: 130%;
+    width: 100%;
+}
 .social li {
     display: block;
-    height: 4em;
-    line-height: 4em;
     margin: -2em;
     position: absolute;
     -webkit-transition: -webkit-transform .5s;

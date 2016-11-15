@@ -49,7 +49,7 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
             @if (Auth::check())
-                <li class="dropdown"><a class="glyphicon glyphicon-user" data-toggle="dropdown" href="{{ url('/login')}}"> Profile<span class="caret"></span></a>
+                <li class="dropdown"><a class="glyphicon glyphicon-user" data-toggle="dropdown" href="{{ url('/login')}}"> {{ auth::user()->name }}<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Page 1-1</a></li>
                         <li><a href="#">Page 1-2</a></li>
@@ -112,13 +112,22 @@
     </div>
 </div>
 </center>
+
+<center>
+    <?php
+    $users = DB::table('customers')->get();
+
+    foreach ($users as $user) {
+        echo $user->name . " " . $user->id . " ". $user->email ."\n";
+        echo '<br>';
+    }
+        ?>
+
+</center>
+
 </body>
-
-<footer>
-
 
     @extends('footer')
     @section('ft')
         @stop
-</footer>
 </html>

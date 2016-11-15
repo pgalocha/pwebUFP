@@ -14,7 +14,6 @@ class OrderController extends Controller
         foreach($orders as $order){
             //$customer = App\Customer::find($order->customer_id);
             echo $order->name . "Ordered by " . $order->customer->name . "</br>";
-
         }
 
     }
