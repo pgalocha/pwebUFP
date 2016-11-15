@@ -113,20 +113,12 @@
 </div>
 </center>
 
-<center>
-    <?php
-    $users = DB::table('customers')->get();
 
-    foreach ($users as $user) {
-        echo $user->name . " " . $user->id . " ". $user->email ."\n";
-        echo '<br>';
-    }
-        ?>
+   <h1><div class="horainicial"><input type="datetime-local" name="horaini"></div></h1>
+   <h1><input type="datetime-local" name="horaini"></div></h1>
 
-</center>
 
 </body>
-
     @extends('footer')
     @section('ft')
         @stop

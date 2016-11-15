@@ -109,11 +109,8 @@ Route::get('/form',['middleware' => 'admin' ,function(){
 
 }]);
 
-Route::get('/admin',['middleware' => 'admin' ,function(){
+Route::get('/user/new',['middleware' => 'admin' ,function(){
     return view('form');
 }]);
-Route::post('/admin',function (Request $request){
-    $name = $request->all();
-    $us = json_encode($name);
-    print_r($us);
-});
+
+Route::post('/user/new','HomeController@teste');

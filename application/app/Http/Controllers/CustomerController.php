@@ -24,6 +24,7 @@ class CustomerController extends Controller
         //$customer = Customer::find($id);
         $customer = Customer::where('id','=',$id)->first();
         echo $customer->name;
-
     }
+
+
 }

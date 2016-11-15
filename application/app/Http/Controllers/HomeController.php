@@ -26,5 +26,12 @@ class HomeController extends Controller
         return view('home');
     }
 
+    public function teste(Request $request){
+        $name = $request->all();
+        print_r($name);
+        //echo $name;
+
+    }
+
 
 }
