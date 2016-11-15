@@ -9,6 +9,11 @@
     @endforeach
 @stop
 
+<body><?php if(true){
+    echo 'hello';
+} ?></body>
+
+
 @section('ft')
 @stop
 

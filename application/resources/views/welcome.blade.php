@@ -1,32 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>BemVindoAoSeuPortalDesportivo</title>
+
+    <title>Rent&Play</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="/css/main1.css" rel="stylesheet">
+    <link href="/css/videofilesoya.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script>
-        var x=1;
-        if(x==1){
-            $(document).ready(function(){
-                $("#flip").click(function(){
-                    $("#panel").slideDown("slow");
-                });
-            });
-            x=0;
-        }else if(x==0){
-            $(document).ready(function(){
-                $("#flip").click(function(){
-                    $("#panel").slideUp("slow");
-                });
-            });
-
-        }
-    </script>
 
 
 
@@ -34,9 +18,9 @@
     <style>
         #panel, #flip {
             padding: 5px;
-            text-align: center;
             background-color: #e5eecc;
             border: solid 1px #c3c3c3;
+            text-align: center;
         }
 
         #panel {
@@ -90,13 +74,51 @@
     </div>
 </nav>
 
-<div class="container">
-    <h3>Right Aligned Navbar</h3>
-    <p>The .navbar-right class is used to right-align navigation bar buttons.</p>
+<section>
+
+
+</section>
+
+<center><div class="container">
+    <br>
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" style="width: 90%" align="center">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox"  width="960" height="600">
+            <div class="item active">
+                <img src="https://scontent.flis1-1.fna.fbcdn.net/t31.0-8/15000758_10209072287182824_5468782221213110371_o.jpg" alt="Chania" width="960" height="600">
+            </div>
+
+            <div class="item">
+                <img src="https://scontent.flis1-1.fna.fbcdn.net/t31.0-8/15000787_10209072288822865_6124278828509177536_o.jpg" alt="Chania" width="960" height="600">
+            </div>
+
+        </div>
+
+        <!-- Left and right controls -->
+        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
 </div>
-
-<div id="flip">Click to slide down panel</div>
-<div id="panel">Hello world!</div>
-
+</center>
 </body>
+
+<footer>
+
+
+    @extends('footer')
+    @section('ft')
+        @stop
+</footer>
 </html>
