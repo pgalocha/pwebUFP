@@ -79,7 +79,7 @@
 
 </section>
 
-<center><div class="container">
+<center><div id="slide" class="container">
     <br>
     <div id="myCarousel" class="carousel slide" data-ride="carousel" style="width: 90%" align="center">
         <!-- Indicators -->
@@ -114,12 +114,25 @@
 </center>
 
 
-   <h1><div class="horainicial"><input type="datetime-local" name="horaini"></div></h1>
-   <h1><input type="datetime-local" name="horaini"></div></h1>
+<input type="button" onclick="demoDisplay()" value="Hide text with display property">
+<input type="button" onclick="demoVisibility()" value="Hide text with visibility property">
+   <h1><div id="hi" class="horainicial"><input type="datetime-local" name="horaini"></div></h1>
+   <h1><div class="horafinal"><input type="datetime-local" name="horafim"></div></h1>
 
 
 </body>
     @extends('footer')
     @section('ft')
         @stop
+
+
+<script>
+    function demoDisplay() {
+        document.getElementById("slide").style.display = "none";
+    }
+
+    function demoVisibility() {
+        document.getElementById("slide").style.display = "block";
+    }
+</script>
 </html>

@@ -11,6 +11,7 @@
 |
 */
 use Illuminate\Http\Request;
+use App\User;
 
 Route::get('/', function () {
     return view('welcome');
@@ -30,8 +31,11 @@ Route::get('hello/{name}', function($name){
 });
 
 Route::get('customer', function () {
-    $users = DB::table('customers')->get();
-    echo json_encode($users);
+    $users = DB::table('users')->get();
+    $team= json_encode($users);
+    echo "<pre>";
+    print_r($users);
+    echo "</pre>";
 });
 
 Route::get('get_customer/{id}', 'CustomerController@get_customer');
@@ -114,3 +118,7 @@ Route::get('/user/new',['middleware' => 'admin' ,function(){
 }]);
 
 Route::post('/user/new','HomeController@teste');
+
+Route::get('/user',['middleware' => 'admin' ,function(){
+    return view('listar')->with('users', App\User::paginate(10));
+}]);

@@ -30,7 +30,6 @@ class HomeController extends Controller
         $name = $request->all();
         print_r($name);
         //echo $name;
-
     }
 
 
