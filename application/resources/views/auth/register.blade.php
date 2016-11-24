@@ -4,6 +4,8 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
+            <center><img src="https://maxcdn.icons8.com/Share/icon/Hands//hand_right1600.png" alt="Smiley face" height="150" width="150"></center>
+
             <div class="panel panel-default">
                 <div class="panel-heading">Register</div>
                 <div class="panel-body">
@@ -79,4 +81,5 @@
         </div>
     </div>
 </div>
+
 @endsection

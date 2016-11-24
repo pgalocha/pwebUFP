@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="/css/main1.css" rel="stylesheet">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -60,17 +62,15 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
+
+                                        <a href="{{ url('/profile') }}" ><span class="glyphicon glyphicon-user"></span> Profile</a>
                                         <a href="{{ url('/logout') }}"
                                             onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                                     document.getElementById('logout-form').submit();"><span class="glyphicon glyphicon-log-out"></span>
                                             Logout
                                         </a>
 
-                                        <a href="http://localhost:8000/mypage"
-                                           onclick="event.preventDefault();
-                                                     document.getElementById('gotopage').submit();">
-                                            backtopage
-                                        </a>
+
 
                                         <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}

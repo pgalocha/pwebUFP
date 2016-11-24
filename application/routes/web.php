@@ -122,3 +122,7 @@ Route::post('/user/new','HomeController@teste');
 Route::get('/user',['middleware' => 'admin' ,function(){
     return view('listar')->with('users', App\User::paginate(10));
 }]);
+
+
+Route::get('/profile','UserController@profile');
+Route::post('/profile','UserController@update_avatar');
