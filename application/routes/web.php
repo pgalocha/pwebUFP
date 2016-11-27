@@ -13,6 +13,11 @@
 use Illuminate\Http\Request;
 use App\User;
 
+Event::listen('404',function (){
+    return Response::error('404');
+});
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -118,11 +123,11 @@ Route::get('/user/new',['middleware' => 'admin' ,function(){
 }]);
 
 Route::post('/user/new','HomeController@teste');
+//Route::post('/user/new','Auth\RegisterController@create');
 
 Route::get('/user',['middleware' => 'admin' ,function(){
     return view('listar')->with('users', App\User::paginate(10));
 }]);
-
 
 Route::get('/profile','UserController@profile');
 Route::post('/profile','UserController@update_avatar');

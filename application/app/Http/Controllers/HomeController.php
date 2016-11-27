@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\User as User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -28,9 +28,21 @@ class HomeController extends Controller
     }
 
     public function teste(Request $request){
-        $name = $request->all();
-        print_r($name);
-        //echo $name;
+
+        /*
+        echo "<pre>";
+        print_r($data);
+        echo "</pre>";*/
+       // echo $data['name'];
+            $data = $request->all();
+            User::create([
+            'name' => $data['name'],
+                'contact' => $data['contact'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+        ]);
+        echo "success!";
+       // echo $data['contact'];
     }
 
 

@@ -54,7 +54,7 @@
 
         } else {
             swal("Bem vindo!", "Está logado!", "success");
-            setCookie("username", "Logado", 365);
+            setCookie("username", "Logado", 1);
 
         }
     }
