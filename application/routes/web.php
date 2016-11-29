@@ -131,3 +131,4 @@ Route::get('/user',['middleware' => 'admin' ,function(){
 
 Route::get('/profile','UserController@profile');
 Route::post('/profile','UserController@update_avatar');
+Route::delete('/profile','UserController@delete_avatar');
