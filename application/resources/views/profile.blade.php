@@ -17,6 +17,24 @@
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <input class="pull-right btn btn-sm btn-danger" type="submit" value="DELETE">
                 </form>
+
+                <form action="/profile" method="POST">
+                    <br>
+                    <br><br><br>
+                    name:<br>
+                    <input type="text"  class="form-control" name="name" value={{ $user->name }}>
+                    <br>
+                    email:<br>
+                    <input type="text" name="email" class="form-control" value="{{$user->email}}">
+                    <br>
+                    contacto:<br>
+                    <input type="text" name="contact" class="form-control" value="{{$user->contact}}">
+                    <br>
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <input name="_method" type="hidden" value="PUT">
+                    <input type="submit" value="Guardar">
+                </form>
+
             </div>
         </div>
     </div>

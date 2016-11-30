@@ -50,4 +50,8 @@ class UserController extends Controller
         return view('profile', array('user' => Auth::user()));
     }
 
+    public function update_info(Request $request){
+       echo $request['contact'];
+    }
+
 }
