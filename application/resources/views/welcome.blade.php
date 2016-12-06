@@ -34,30 +34,19 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">Rent&Play</a>
+            <a class="navbar-brand" href="/">Rent&Play</a>
         </div>
-        <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a href="#">Page 1-1</a></li>
-                    <li><a href="#">Page 1-2</a></li>
-                    <li><a href="#">Page 1-3</a></li>
-                </ul>
-            </li>
-            <li><a href="#">Page 2</a></li>
-        </ul>
         <ul class="nav navbar-nav navbar-right">
             @if (Auth::check())
                 <li class="dropdown"><a class="glyphicon glyphicon-user" data-toggle="dropdown" href="{{ url('/login')}}"> {{ auth::user()->name }}<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Page 1-1</a></li>
-                        <li><a href="#">Page 1-2</a></li>
+                        <li><a href="{{ url('/profile') }}" ><span class="glyphicon glyphicon-user"></span> Profile</a></li>
                         <li>
+
                             <a href="{{ url('/logout') }}"
                                onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                LogoutNovo
+                                                     document.getElementById('logout-form').submit();"><span class="glyphicon glyphicon-log-out"></span>
+                                Logout
                             </a>
                             <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                                 {{ csrf_field() }}

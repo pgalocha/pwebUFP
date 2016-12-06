@@ -23,12 +23,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
-
+            return view('home');
     }
 
     public function teste(Request $request){
-
         /*
         echo "<pre>";
         print_r($data);

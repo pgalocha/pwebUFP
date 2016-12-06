@@ -51,7 +51,22 @@ class UserController extends Controller
     }
 
     public function update_info(Request $request){
-       echo $request['contact'];
+
+        $this->validate($request, [
+            'contact' => 'required|max:9|min:9',
+            'name' => 'required|max:255|min:1',
+        ]);
+
+        $user = Auth::user();
+        $contacto = $request['contact'];
+        if($user->contact == $contacto){
+            return view('profile', array('user' => Auth::user()));
+        }else{
+            $user->contact=$contacto;
+            $user->save();
+        }
+        return view('profile', array('user' => Auth::user()));
+
     }
 
 }

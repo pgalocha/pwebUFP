@@ -109,6 +109,16 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
+Route::get('/home' ,function(){
+    if( Auth::user()->isAdmin()){
+        return view('/admin');
+    }
+    return view('/home');
+});
+
+
+
+
 Route::get('/registuser','HomeController@regist');
 
 Route::get('/form',['middleware' => 'admin' ,function(){
@@ -128,6 +138,9 @@ Route::post('/user/new','HomeController@teste');
 Route::get('/user',['middleware' => 'admin' ,function(){
     return view('listar')->with('users', App\User::paginate(10));
 }]);
+
+
+
 
 Route::get('/profile','UserController@profile');
 Route::post('/profile','UserController@update_avatar');
