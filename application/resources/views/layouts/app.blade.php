@@ -63,7 +63,12 @@
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
 
+                                    @if(!Auth::user()->isAdmin())
                                         <a href="{{ url('/profile') }}" ><span class="glyphicon glyphicon-user"></span> Profile</a>
+                                    @endif
+                                    @if(Auth::user()->isAdmin())
+                                        <a href="{{ url('/home') }}" ><span class="glyphicon glyphicon-user"></span> Profile</a>
+                                    @endif
                                         <a href="{{ url('/logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();"><span class="glyphicon glyphicon-log-out"></span>

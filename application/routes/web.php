@@ -128,21 +128,44 @@ Route::get('/form',['middleware' => 'admin' ,function(){
 
 }]);
 
-Route::get('/user/new',['middleware' => 'admin' ,function(){
+Route::get('/home/user/new',['middleware' => 'admin' ,function(){
     return view('form');
 }]);
 
-Route::post('/user/new','HomeController@teste');
+Route::post('/home/user/new','HomeController@teste');
 //Route::post('/user/new','Auth\RegisterController@create');
 
-Route::get('/user',['middleware' => 'admin' ,function(){
+Route::get('/home/user',['middleware' => 'admin' ,function(){
     return view('listar')->with('users', App\User::paginate(10));
 }]);
 
+Route::get('/cache',function(){
+    //Cache::put('foo', 'bar',10);
+  return Cache::get('foo');
 
+});
 
+Route::get('/home/user/{id}', 'HomeController@edit');
+
+Route::get('/profile',function (){
+    die("teste");
+});
 
 Route::get('/profile','UserController@profile');
 Route::post('/profile','UserController@update_avatar');
 Route::delete('/profile','UserController@delete_avatar');
 Route::put('/profile','UserController@update_info');
+Route::put('/home/user/{id}','UserController@update_info_adm');
+Route::get('/profile/changepass',function(){
+    return view('newpass');
+});
+
+Route::get('/click', function(){
+    return view('home');
+});
+Route::post('/click', function(){
+    return view('home');
+});
+Route::put('/profile/changepass','UserController@updatepass');
+
+Route::post('/userdelete','UserController@userdelete');

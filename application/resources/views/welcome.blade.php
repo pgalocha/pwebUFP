@@ -40,7 +40,13 @@
             @if (Auth::check())
                 <li class="dropdown"><a class="glyphicon glyphicon-user" data-toggle="dropdown" href="{{ url('/login')}}"> {{ auth::user()->name }}<span class="caret"></span></a>
                     <ul class="dropdown-menu">
+                        @if(!Auth::user()->isAdmin())
                         <li><a href="{{ url('/profile') }}" ><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                        @endif
+                            @if(Auth::user()->isAdmin())
+                        <li><a href="{{ url('/home') }}" ><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+
+                    @endif
                         <li>
 
                             <a href="{{ url('/logout') }}"

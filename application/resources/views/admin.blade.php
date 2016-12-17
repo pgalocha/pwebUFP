@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 
@@ -64,23 +65,24 @@
             margin-bottom: 30px;
         }
     </style>
+
 </head>
 <body>
 
 <div class="flex-center position-ref full-height">
-
-
+    <center><img src="http://koolkampus.co.in/wp-content/uploads/2014/02/admin.png" alt="Smiley face" height="200" width="200"></center>
     <div class="content">
         <div class="title m-b-md">
            Admin DashBoard MENU
         </div>
 
         <div class="links">
-            <a href="/form">Add NewUser</a>
-            <a href="#">Edit User</a>
-            <a href="/user">ListALl</a>
+            <a href="/home/user/new">Add NewUser</a>
+            <a href="/home/user">Edit User</a>
         </div>
     </div>
 </div>
+
 </body>
+
 </html>

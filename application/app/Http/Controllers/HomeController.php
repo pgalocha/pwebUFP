@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\User as User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -39,9 +40,15 @@ class HomeController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
-        echo "success!";
+        return view('/');
        // echo $data['contact'];
     }
 
+    public function edit($id)
+    {
+        $customer = User::find($id);
+        // echo $customer->name;
+        return view('profile_user_adm', array('user' => $customer ,'id' => $id));
 
+    }
 }

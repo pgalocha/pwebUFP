@@ -69,6 +69,9 @@
                         </div>
                     </div>
                     <br>
+
+
+
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <input name="_method" type="hidden" value="PUT">
                     <br>
@@ -76,7 +79,7 @@
                 </form>
 
                 <br>
-                <center><p><a href="#">Mudar password?</a></p></center>
+                <center><p><a href="/profile/changepass">Mudar password?</a></p></center>
 
                 <center><p><a href="#">Apagar conta?</a></p></center>
 

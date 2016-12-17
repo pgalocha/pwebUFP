@@ -8,6 +8,8 @@ use Auth;
 use Image;
 //use Intervention\Image\File;
 use File;
+use App\User as User;
+
 
 
 class UserController extends Controller
@@ -15,6 +17,7 @@ class UserController extends Controller
     //
     public function profile(){
         return view('profile', array('user' => Auth::user()));
+
     }
     /**
      * @return string
@@ -55,18 +58,72 @@ class UserController extends Controller
         $this->validate($request, [
             'contact' => 'required|max:9|min:9',
             'name' => 'required|max:255|min:1',
-        ]);
 
-        $user = Auth::user();
-        $contacto = $request['contact'];
-        if($user->contact == $contacto){
+        ]);
+        if( ! Auth::user()->isAdmin()){
+            $user = Auth::user();
+            $contacto = $request['contact'];
+            if($user->contact == $contacto){
+                return view('profile', array('user' => Auth::user()));
+            }else{
+                $user->contact=$contacto;
+                $user->save();
+            }
             return view('profile', array('user' => Auth::user()));
-        }else{
-            $user->contact=$contacto;
-            $user->save();
         }
-        return view('profile', array('user' => Auth::user()));
 
     }
+
+    public function update_info_adm(Request $request){
+        // print_r($request);
+        //echo $request['contact'];
+        // echo $request['name'];
+        //echo $request['id'];
+        $this->validate($request, [
+            'contact' => 'required|max:9|min:9',
+            'name' => 'required|max:255|min:1',
+            'email' => 'required',
+            'password_user'=> 'required|min:5',
+
+        ]);
+
+        $customer = User::find($request['id']);
+        $customer->name=$request['name'];
+        $customer->id=$request['id'];
+        $customer->contact=$request['contact'];
+        $customer->email=$request['email'];
+        $customer->password=bcrypt($request['password_user']);
+        $customer->save();
+        return view('profile_user_adm',array('user' => $customer,'id' => $request['id']));
+
+    }
+
+    public function userdelete(Request $request){
+        User::find($request['corpo'])->delete();
+    }
+
+
+    public function updatepass(Request $request){
+        $user = Auth::user();
+
+        echo bcrypt($request['password_old']);
+
+        if(bcrypt($request['password_old'])== $user->password){
+            $this->validate($request, [
+                'password' => 'required|min:5|confirmed',
+            ]);
+
+        }
+        else {
+
+            die('password antiga nao corresponde!');
+        }
+
+
+
+
+
+    }
+
 
 }
