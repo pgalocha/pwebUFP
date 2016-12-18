@@ -60,7 +60,7 @@
                                         url: '/userdelete',
                                         data: {_token: token, id: valorid },
                                         success: function(data) {
-                                            $( "tr" ).remove("#mostra{{$user->id}}");
+                                            $( "tr" ).remove(res);
                                         },
                                         error: function(data) {
                                             $( "tr" ).remove(res);
