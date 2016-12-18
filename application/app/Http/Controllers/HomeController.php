@@ -40,7 +40,7 @@ class HomeController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
-        return view('/');
+        return redirect('home/user');
        // echo $data['contact'];
     }
 

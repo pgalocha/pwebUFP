@@ -99,7 +99,7 @@ class UserController extends Controller
     }
 
     public function userdelete(Request $request){
-        User::find($request['corpo'])->delete();
+        User::find($request['id'])->delete();
     }
 
 

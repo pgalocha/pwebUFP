@@ -31,7 +31,7 @@
                         <td ><a href="/home/user/{{ $user->id }}"> {{ $user->name }} </a></td>
                          <td>{{ $user->email }}</td>
                          <td>{{ $user->contact }}</td>
-                         <td><button   type="button" class="delete-modal btn btn-danger"><span class="glyphicon glyphicon-trash"></span>Apagar</button></td>
+                         <td><button   id="mostra" value="{{ $user->id }}"  type="button" class="delete-modal btn btn-danger"><span class="glyphicon glyphicon-trash"></span>Apagar</button></td>
                      </tr>
                          @endforeach
                      </tbody>
@@ -49,24 +49,23 @@
 
                 <script type="text/javascript">
                     $(document).ready(function(){
-                        var uid='{{$user->id}}';
-                        var token='{{Session::token()}}';
-                        var json = '{{$user->id}}';
-
                         $('.delete-modal').on('click',function(){
-
-                            jQuery.ajax({
-                                method: 'POST',
-                                dataType: 'application/json',
-                                url: '/userdelete',
-                                data: {body: $('#id').val(), _token: token, corpo: json },
-                                success: function(data) {
-                                    $( "tr" ).remove("#mostra{{$user->id}}");
-                                },
-                                error: function(data) {
-                                    $( "tr" ).remove("#mostra{{$user->id}}");
-                                },
-                            })
+                            var valorid = $(this).val();
+                            var token='{{Session::token()}}';
+                            var str1= "#mostra";
+                            var res = str1.concat(valorid);
+                                    jQuery.ajax({
+                                        method: 'POST',
+                                        dataType: 'application/json',
+                                        url: '/userdelete',
+                                        data: {_token: token, id: valorid },
+                                        success: function(data) {
+                                            $( "tr" ).remove("#mostra{{$user->id}}");
+                                        },
+                                        error: function(data) {
+                                            $( "tr" ).remove(res);
+                                        },
+                                    })
 
 
                         });
