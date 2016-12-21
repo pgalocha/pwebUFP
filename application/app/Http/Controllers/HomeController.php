@@ -51,4 +51,8 @@ class HomeController extends Controller
         return view('profile_user_adm', array('user' => $customer ,'id' => $id));
 
     }
+
+    public function checkdate(Request $request){
+        echo "ola";
+    }
 }
