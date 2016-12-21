@@ -8,10 +8,12 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="/css/main1.css" rel="stylesheet">
     <link href="/css/videofilesoya.css" rel="stylesheet">
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+
+
 
     <style>
         #panel, #flip {
@@ -111,8 +113,6 @@
 <input type="button" onclick="demoVisibility()" value="Hide text with visibility property">
    <h1><div id="hi" class="horainicial"><input type="datetime-local" name="horaini"></div></h1>
    <h1><div class="horafinal"><input type="datetime-local" name="horafim"></div></h1>
-
-
 
 
 </body>

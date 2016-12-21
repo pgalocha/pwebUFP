@@ -17,32 +17,11 @@ Event::listen('404',function (){
     return Response::error('404');
 });
 
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('main/', function () {
-    return view('principal');
-});
-
-Route::get('user',function (){
-    return view('testerota');
-});
-
-Route::get('user/{id}', function ($id){
-    echo $id;
-})->name('profile')->where(['id' => '[0-9]+']);
-
-Route::post('user',function (Request $request){
-     $url = route('profile', ['id' => $request['id']]);
-    return Redirect::to($url);
-});
-
-Route::get('basic',function (){
-    return view('basic');
-});
-
-Route::get('checkdate','HomeController@checkdate');
 /*
 Route::get('home', function (){
 
@@ -136,6 +115,8 @@ Route::get('/home' ,function(){
     }
     return view('/home');
 });
+
+
 
 
 Route::get('/registuser','HomeController@regist');
