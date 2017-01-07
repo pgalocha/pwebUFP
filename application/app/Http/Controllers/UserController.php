@@ -9,7 +9,7 @@ use Image;
 //use Intervention\Image\File;
 use File;
 use App\User as User;
-
+use Illuminate\Support\Facades\Hash;
 
 
 class UserController extends Controller
@@ -105,18 +105,25 @@ class UserController extends Controller
 
     public function updatepass(Request $request){
         $user = Auth::user();
+        $passold= $request['password_old'];
+        $passbd= $user::find($user->id)->password;
 
-        echo bcrypt($request['password_old']);
-
-        if(bcrypt($request['password_old'])== $user->password){
+        $user = User::find($user->id);
+        if(Hash::check($passold, $user->password))
+        {
             $this->validate($request, [
-                'password' => 'required|min:5|confirmed',
+
+                'password'=> 'required|min:5',
+
             ]);
+            $user->password= bcrypt($request['password']);
+            $user->save();
+            return view('profile', array('user' => Auth::user()));
 
         }
-        else {
-
-            die('password antiga nao corresponde!');
+        else
+        {
+            return view('profile', array('user' => Auth::user()));
         }
 
 

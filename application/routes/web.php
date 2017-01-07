@@ -17,11 +17,9 @@ Event::listen('404',function (){
     return Response::error('404');
 });
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('main/', function () {
+
+Route::get('/', function () {
     return view('principal');
 });
 
@@ -158,10 +156,30 @@ Route::get('/home/user',['middleware' => 'admin' ,function(){
     return view('listar')->with('users', App\User::paginate(10));
 }]);
 
-Route::get('/cache',function(){
-    //Cache::put('foo', 'bar',10);
-  return Cache::get('foo');
+Route::get('/hi' ,function(Request $request ){
+    return $request;
 
+});
+Route::post('/hi' ,function(Request $request ){
+    return $request;
+
+});
+
+Route::post('/home/upload' ,function(Request $request ){
+    return $request;
+
+});
+
+Route::get('/date',function(Request $request){
+    $date = $request['date'];
+   if($request->ajax()) return Response::json(['success'=> true ]);
+});
+
+
+
+Route::get('/cache',function(){
+    Cache::put('foo',App\Customer::all(),10);
+    return Cache::get('foo');
 });
 
 Route::get('/home/user/{id}', 'HomeController@edit');

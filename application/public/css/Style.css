@@ -28,7 +28,6 @@ nav a{
 
 
 .sect{
-    height:100%;
     background-size: 100%;
     background-attachment: fixed;
 
@@ -36,12 +35,12 @@ nav a{
 }
 .subSection{
    height: 50%;
-    background-color: #fff2ef;
+    background-color: #FFFFFF;
     background-size: 100%;
 }
 
 .sectOne{
-
+    height:100%;
 }
 .sectTwo{
     background-image: url(http://www.planwallpaper.com/static/images/bicycle-1280x720.jpg) ;
@@ -50,7 +49,16 @@ nav a{
 }
 .SectThree{
     background-image: url(http://www.planwallpaper.com/static/images/bicycle-1280x720.jpg);
+    height:50%;
 
 }
 
+.Footer{
+    background-color: #FFFFFF;
+    height:10%;
+}
+
+p{
+    text-align: center;
+}
 

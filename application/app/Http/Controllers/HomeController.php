@@ -52,6 +52,8 @@ class HomeController extends Controller
 
     }
 
+
+
     public function checkdate(Request $request){
         echo "ola";
     }
