@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\User as User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 
 class HomeController extends Controller
 {
@@ -53,8 +54,4 @@ class HomeController extends Controller
     }
 
 
-
-    public function checkdate(Request $request){
-        echo "ola";
-    }
 }

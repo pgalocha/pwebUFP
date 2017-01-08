@@ -21,7 +21,7 @@
 <div class="sect sectOne" id="homeSection" >
     <div class="background-wrap">
         <video id="video-bg-elem" preload="auto" autoplay="true" loop="loop" muted="muted">
-            <source src="/css/4k.mp4" type="video/mp4">
+            <source  src="#" value="/css/4k.mp4" type="video/mp4">
             Video not supported
         </video>
     </div>
@@ -45,18 +45,19 @@
         <br>
         <br>
         <br>
-<center>
+        <center>
 
-        <input  type="text" id="datetimepicker" class="" />
-        <button onclick="outra()" id="fazaluguer" name="singlebutton" class="btn btn-primary">Verificar Horário</button>
-        <p1 id="disponibilidade"> Horário Disponível!</p1>
-</center>
-        <div id="div1"><h2>Let jQuery AJAX Change This Text</h2></div>
+            <input  type="text" id="datetimepicker" class="" />
+            <button onclick="outra()" id="fazaluguer" name="singlebutton" class="btn btn-primary">Verificar Horário</button>
+            <p1 id="disponibilidade"> Horário Disponível!</p1>
+        </center>
+        <div id="div1"><h2></h2></div>
     </div>
 
 </div>
 <div class="sect SectThree" id="we" ></div>
 <div class="subSection Footer" id="footerSection" >
+
     <div class="container">
         <p class="float-xs-right">
             <br>
@@ -67,34 +68,32 @@
         <br>
         <br><br><br>
         <p> Designed by <a href="https://www.facebook.com/pgalocha">Pedro Galocha© </a></p>
+
     </div>
 </div>
 </body>
 
 <script>
-$(document).ready(function () {
-    demoDisplay();
-    setBindings();
-})
-
-function demoDisplay() {
-    document.getElementById("aluguerSection").style.display = "block";
-    document.getElementById("disponibilidade").style.display = "none";
-}
-function demoVisibility() {
-    document.getElementById("aluguerSection").style.display = "block";
-}
-function setBindings() {
-
-    $('button').click(function(e) {
-        e.preventDefault();
-        var sectionID=e.currentTarget.id+"Section";
-        $('html body').animate({
-            scrollTop: $('#' + sectionID).offset().top
-        },1000)
-
+    $(document).ready(function () {
+        demoDisplay();
+        setBindings();
     })
-}
+    function demoDisplay() {
+        document.getElementById("aluguerSection").style.display = "block";
+        document.getElementById("disponibilidade").style.display = "none";
+    }
+    function demoVisibility() {
+        document.getElementById("aluguerSection").style.display = "block";
+    }
+    function setBindings() {
+        $('button').click(function(e) {
+            e.preventDefault();
+            var sectionID=e.currentTarget.id+"Section";
+            $('html body').animate({
+                scrollTop: $('#' + sectionID).offset().top
+            },1000)
+        })
+    }
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -103,27 +102,42 @@ function setBindings() {
 
 
 <script>
-    $("#datetimepicker").datetimepicker();
-    function outra() {
-        var date=document.getElementById("datetimepicker").value;
-        alert(date);
-        var teste=String(date);
-        var urso  = teste.replace(" ", '/');
-        alert(urso);
-        $.ajax({url: "/hi", data: { field1: date, field2 : "hello2"} ,success: function(result){
-            $("#div1").html(result);
-        },error: function(result){
-            $("#div1").html(result);
-        }});
 
+        $("#datetimepicker").datetimepicker();
 
-        $.get("/date?="+ date ,function(result){
-            console.log(result);
-        });
-
-
-
-
-    }
+        function outra() {
+            var date=document.getElementById("datetimepicker").value;
+           // alert(date);
+            var teste=String(date);
+            var urso  = teste.replace(" ", '/');
+           // alert(urso);
+            var res = urso.split("/");
+            var ano=res[0];
+            var mes=res[1];
+            var dia=res[2];
+            var hora=res[3];
+            var res1 = ano.concat("-");
+            var res2 = res1.concat(mes);
+            var res3 = res2.concat("-");
+            var res4 = res3.concat(dia);
+            //alert(hora);
+            var token='{{Session::token()}}';
+            jQuery.ajax({
+                method: 'POST',
+                dataType:"json",
+                url: '/schedule',
+                data: {_token: token ,date : res4 ,hora: hora},
+                success: function(result) {
+                   // alert("Olaxxx");
+                    console.log(result);
+                    $("#div1").html(result['info']);
+                },
+                error: function(result) {
+                    //alert("Olass");
+                    console.log(result);
+                    $("#div1").html(result);
+                },
+            })
+        }
 </script>
 </html>

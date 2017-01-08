@@ -10,6 +10,8 @@ h1,h2,h3,h4,h5,h6{
     margin-bottom: 20px;
 }
 
+
+
 nav{
     position: fixed;
     width: 100%;
@@ -34,7 +36,7 @@ nav a{
 
 }
 .subSection{
-   height: 50%;
+    height: 50%;
     background-color: #FFFFFF;
     background-size: 100%;
 }
@@ -61,4 +63,3 @@ nav a{
 p{
     text-align: center;
 }
-
