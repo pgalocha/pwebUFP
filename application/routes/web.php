@@ -17,6 +17,15 @@ use App\Order;
 Event::listen('404',function (){
     return Response::error('404');
 });
+
+Route::group(['middleware' => 'admin'], function () {
+    Route::get('/home/user/new',['middleware' => 'admin' ,function(){
+        return view('form');
+    }]);
+    Route::post('/home/user/new','HomeController@teste');
+});
+
+
 Route::get('/', function () {
     $cidades = DB::table('cidade')->get();
     //print_r($cidades['0']);
@@ -118,10 +127,7 @@ Route::get('/form',['middleware' => 'admin' ,function(){
         return view('form');
     }
 }]);
-Route::get('/home/user/new',['middleware' => 'admin' ,function(){
-    return view('form');
-}]);
-Route::post('/home/user/new','HomeController@teste');
+
 //Route::post('/user/new','Auth\RegisterController@create');
 Route::get('/home/user',['middleware' => 'admin' ,function(){
     return view('listar')->with('users', App\User::paginate(10));
