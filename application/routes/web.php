@@ -13,15 +13,30 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Order;
 
+
 Event::listen('404',function (){
     return Response::error('404');
 });
 Route::get('/', function () {
-    return view('principal');
+    $cidades = DB::table('cidade')->get();
+    //print_r($cidades['0']);
+    //$cidade=$cidades['0'];
+  //  echo $cidade->id;
+   return View::make('principal')->with('cidades',$cidades);
+    //return view('principal');
 });
+Route::get('/cidade',function (){
+    $cidade= \Illuminate\Support\Facades\Input::get('cid_id');
+    //$campos = DB::table('campos')->where('cidade', $cidade);
+    //$cidades = DB::table('campos')->get();
+    $cidades = DB::table('campos')->where('cidade', '=', $cidade)->get();
+    return $cidades;
+});
+
 Route::get('user',function (){
     return view('testerota');
 });
+
 Route::get('user/{id}', function ($id){
     echo $id;
 })->name('profile')->where(['id' => '[0-9]+']);
@@ -155,9 +170,13 @@ Route::get('/outra',function(){
 });
 
 
+
 Route::post('/schedule',function(Request $request){
    // echo \Illuminate\Support\Facades\Input::get('date');
-   $var= App\Order::where('date',\Illuminate\Support\Facades\Input::get('date'))->get();
+    $date=\Illuminate\Support\Facades\Input::get('date');
+    $campo=\Illuminate\Support\Facades\Input::get('campo');
+
+   $var= App\Order::where('date',$date)->get();
 
     if ($var->isEmpty()) {
         return Response::json(array(
@@ -165,11 +184,58 @@ Route::post('/schedule',function(Request $request){
             'info'   => "Está Livre"
         ));
 
-    }else {
-        return Response::json(array(
-            'error' => true,
-            'info'   => "Está Ocupado"
-        ));
     }
+    foreach ($var as $teste){
+        if($teste['campo']== $campo){
+            return Response::json(array(
+                'error' => true,
+                'info'   => "Está Ocupado"
+            ));
+        }
+    }
+    return Response::json(array(
+        'error' => true,
+        'info'   => "Está Livre"
+    ));
+
 });
 
+Route::post('/ordernew',function(){
+    $date=\Illuminate\Support\Facades\Input::get('date');
+    $camp=\Illuminate\Support\Facades\Input::get('campo');
+    $horas=\Illuminate\Support\Facades\Input::get('hora');
+
+    if(Auth::user()){
+        $infocampo = DB::table('campos')->where('nome', '=', "Cucu")->get();
+
+        return Response::json(array(
+            'success' => true,
+            'auth'   => true,
+            'custo' => $infocampo,
+        ));
+
+    }else{
+        return Response::json(array(
+            'error' => true,
+            'auth'   => false,
+        ));
+
+    }
+
+
+});
+
+Route::post('/makereserv',function(){
+    $date=\Illuminate\Support\Facades\Input::get('date');
+    $camp=\Illuminate\Support\Facades\Input::get('campo');
+    $horas=\Illuminate\Support\Facades\Input::get('hora');
+    $price=\Illuminate\Support\Facades\Input::get('preco');
+    $id= Auth::user()->id;
+
+    return Response::json(array(
+        'success' => true,
+    ));
+
+
+
+});

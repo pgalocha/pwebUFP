@@ -13,6 +13,8 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <script type="text/javascript" src="/js/jquery.js"></script>
+    <script src="/js/sweetalert.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/sweetalert.css">
 </head>
 
 <body>
@@ -21,15 +23,14 @@
 <div class="sect sectOne" id="homeSection" >
     <div class="background-wrap">
         <video id="video-bg-elem" preload="auto" autoplay="true" loop="loop" muted="muted">
-            <source  src="#" value="/css/4k.mp4" type="video/mp4">
+            <source  src="/media/teste.mp4" value="intro_movie" type="video/mp4">
             Video not supported
         </video>
     </div>
     <div class="content">
         <h1>Rent&Play</h1>
         <p>Maior Portal de Aluguer de espacos desportivos!</p>
-        <a href="{{ url('/login') }}"><span class="glyphicon glyphicon-log-in"></span> Login</a>
-        <a href="{{ url('/register') }}"><span class="glyphicon glyphicon-user"></span> Sign Up</a>
+
         <label class="col-md-4 control-label" for="singlebutton"></label>
         <div class="col-md-4 text-center">
             <button onclick="demoVisibility()" id="aluguer" name="singlebutton" class="btn btn-primary"> Alugar Campo</button>
@@ -41,6 +42,28 @@
 
 
 <div class="subSection" id="aluguerSection">
+
+    <div class="col-lg-4">
+        {{Form::open(array('url'=> '','files'=> true))}}
+        <div class="form-group">
+            <label for="">Cidades</label>
+            <select class="form-control input-sm" name="cidade" id="cidade">
+                @foreach($cidades as $cidade)
+                    <option value="{{$cidade->nome}}">{{$cidade->nome}}</option>
+                    @endforeach
+            </select>
+
+        </div>
+        <div class="form-group">
+            <label for="">Campos</label>
+            <select class="form-control input-sm" name="campo" id="campo">
+                <option value=""></option>
+            </select>
+
+        </div>
+
+        {{Form::close()}}
+    </div>
     <div class="container">
         <br>
         <br>
@@ -49,10 +72,16 @@
 
             <input  type="text" id="datetimepicker" class="" />
             <button onclick="outra()" id="fazaluguer" name="singlebutton" class="btn btn-primary">Verificar Horário</button>
-            <p1 id="disponibilidade"> Horário Disponível!</p1>
+            <p1 id="disponibilidade"></p1>
         </center>
         <div id="div1"><h2></h2></div>
     </div>
+    <div id="fotoSection">
+
+       <div id="nomecampo"></div>
+    </div>
+
+
 
 </div>
 <div class="sect SectThree" id="we" ></div>
@@ -106,6 +135,11 @@
         $("#datetimepicker").datetimepicker();
 
         function outra() {
+            $( "#alugame" ).remove();
+            var camponome = $('#campo').find(":selected").text();
+
+           // console.log(camponome);
+
             var date=document.getElementById("datetimepicker").value;
            // alert(date);
             var teste=String(date);
@@ -126,11 +160,14 @@
                 method: 'POST',
                 dataType:"json",
                 url: '/schedule',
-                data: {_token: token ,date : res4 ,hora: hora},
+                data: {_token: token ,date : res4 ,hora: hora, campo:camponome},
                 success: function(result) {
                    // alert("Olaxxx");
                     console.log(result);
                     $("#div1").html(result['info']);
+                    if(result['info']=="Está Livre"){
+                        $("#aluguerSection").append('<button onclick="aluga()" id="alugame" name="singlebutton" class="btn btn-primary">Fazer Aluguer!</button>');
+                    }
                 },
                 error: function(result) {
                     //alert("Olass");
@@ -138,6 +175,127 @@
                     $("#div1").html(result);
                 },
             })
+
+
+
         }
 </script>
+<script>
+
+    $("#cidade").on('change',function (e) {
+        $( "#fotoSection" ).remove();
+        $("#aluguerSection").append('<div id="fotoSection"></div>');
+        console.log(e);
+        var cid_id= e.target.value;
+        console.log(cid_id);
+        //ajax
+        $.get('cidade?cid_id='+ cid_id, function (data) {
+            $("#campo").empty();
+            console.log(data);
+            $.each(data,function(index, subObj){
+                console.log(subObj+"ola");
+                $("#campo").append(' <option value="'+subObj.id+'">'+subObj.nome+'</option>');
+               // $("#fotoSection").append(' <img src="'+subObj.foto+'" alt="'+subObj.nome+'" style="width:304px;height:228px;">');
+              // $("#fotoSection").append(' <h1> '+subObj.nome+'</h1> ');
+
+            });
+
+        });
+    });
+
+
+</script>
+<script>
+    function aluga(){
+        var token='{{Session::token()}}';
+        alert("carregaste em mim");
+        var camponome = $('#campo').find(":selected").text();
+        var date=document.getElementById("datetimepicker").value;
+        // alert(date);
+        var teste=String(date);
+        var urso  = teste.replace(" ", '/');
+        // alert(urso);
+        var res = urso.split("/");
+        var ano=res[0];
+        var mes=res[1];
+        var dia=res[2];
+        var hora=res[3];
+        var res1 = ano.concat("-");
+        var res2 = res1.concat(mes);
+        var res3 = res2.concat("-");
+        var res4 = res3.concat(dia);
+
+        jQuery.ajax({
+            method: 'POST',
+            dataType:"json",
+            url: '/ordernew',
+            data: {_token: token ,date : res4 ,hora: hora, campo:camponome},
+            success: function(result) {
+                // alert("Olaxxx");
+               // console.log(result);
+                if(result['auth']==true){
+                    //alert(result.custo["0"].preco);
+                    swal({
+                                html:true,
+                                title: "Pedido de Aluguer",
+                                text: "<br>Date: "+res4+"<br>Hora: "+hora+"<br>Campo: "+camponome+"<br>Preço: "+result.custo["0"].preco+"",
+                                type: "info",
+                                showCancelButton: true,
+                                closeOnConfirm: false,
+                                showLoaderOnConfirm: true,
+                            },
+                            function(){
+                                jQuery.ajax({
+                                    method: 'POST',
+                                    dataType:"json",
+                                    url: '/makereserv',
+                                    data: {_token: token ,date : res4 ,hora: hora, campo:camponome, preco: result.custo["0"].preco},
+                                    success: function(result) {
+
+                                        setTimeout(function(){
+                                            swal("Aluguer Concluido!");
+                                        }, 2000);
+
+                                    },
+                                    error: function(result) {
+
+                                        setTimeout(function(){
+                                            swal("Aluguer não Concluido!");
+                                        }, 2000);
+
+                                    },
+                                })
+
+
+
+
+                            });
+
+
+                }else{
+                    alert("Não está logado");
+                    console.log("Loga-te");
+
+                }
+            },
+            error: function(result) {
+                //alert("Olass");
+
+            },
+        })
+
+
+
+
+
+
+    }
+
+
+
+
+</script>
+
+
+
 </html>
