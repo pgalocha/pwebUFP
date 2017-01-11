@@ -18,3 +18,6 @@ This is the repo for my implementation of a WEB app and it's respective content.
  - Update Your Profile.
  - Reset your password if you forget with mailing service.
  
+ 
+ 
+<img src="http://prntscr.com/dubb86" alt="Smiley face" height="42" width="42">
