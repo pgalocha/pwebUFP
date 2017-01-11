@@ -12,3 +12,9 @@ This is the repo for my implementation of a WEB app and it's respective content.
 ## Initial functionalities
 - Clients
  - You must sign in , to have the possibility of making a online reserve.
+ - You can check a shecdule before you make a bookmark on the website.
+ - See all your bookmarks history.
+ - Login with Facebook.
+ - Update Your Profile.
+ - Reset your password if you forget with mailing service.
+ 
