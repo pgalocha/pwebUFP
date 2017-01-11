@@ -164,13 +164,10 @@
             $( "#alugame" ).remove();
             var camponome = $('#campo').find(":selected").text();
 
-           // console.log(camponome);
 
             var date=document.getElementById("datetimepicker").value;
-           // alert(date);
             var teste=String(date);
             var urso  = teste.replace(" ", '/');
-           // alert(urso);
             var res = urso.split("/");
             var ano=res[0];
             var mes=res[1];
@@ -180,7 +177,6 @@
             var res2 = res1.concat(mes);
             var res3 = res2.concat("-");
             var res4 = res3.concat(dia);
-            //alert(hora);
             var token='{{Session::token()}}';
             jQuery.ajax({
                 method: 'POST',
@@ -188,7 +184,6 @@
                 url: '/schedule',
                 data: {_token: token ,date : res4 ,hora: hora, campo:camponome},
                 success: function(result) {
-                   // alert("Olaxxx");
                     console.log(result);
                     $("#div1").html(result['info']);
                     if(result['info']=="Está Livre"){
@@ -196,7 +191,6 @@
                     }
                 },
                 error: function(result) {
-                    //alert("Olass");
                     console.log(result);
                     $("#div1").html(result);
                 },
@@ -221,8 +215,7 @@
             $.each(data,function(index, subObj){
                 console.log(subObj+"ola");
                 $("#campo").append(' <option value="'+subObj.id+'">'+subObj.nome+'</option>');
-               // $("#fotoSection").append(' <img src="'+subObj.foto+'" alt="'+subObj.nome+'" style="width:304px;height:228px;">');
-              // $("#fotoSection").append(' <h1> '+subObj.nome+'</h1> ');
+
 
             });
 
@@ -236,10 +229,8 @@
         var token='{{Session::token()}}';
         var camponome = $('#campo').find(":selected").text();
         var date=document.getElementById("datetimepicker").value;
-        // alert(date);
         var teste=String(date);
         var urso  = teste.replace(" ", '/');
-        // alert(urso);
         var res = urso.split("/");
         var ano=res[0];
         var mes=res[1];
@@ -256,10 +247,8 @@
             url: '/ordernew',
             data: {_token: token ,date : res4 ,hora: hora, campo:camponome},
             success: function(result) {
-                // alert("Olaxxx");
-               // console.log(result);
                 if(result['auth']==true){
-                    //alert(result.custo["0"].preco);
+
                     swal({
                                 html:true,
                                 title: "Pedido de Aluguer",
@@ -277,34 +266,33 @@
                                     data: {_token: token ,date : res4 ,hora: hora, campo:camponome, preco: result.custo["0"].preco},
                                     success: function(result) {
 
-                                        setTimeout(function(){
-                                            swal("Aluguer Concluido!");
-                                        }, 2000);
+                                        if(result['success']==true){
+                                            setTimeout(function(){
+                                                swal("Aluguer Concluido!");
+                                            }, 2000);
+                                        }else{
+                                            setTimeout(function(){
+                                                swal("Aluguer não Concluido!");
+                                            }, 2000);
+                                        }
+
 
                                     },
                                     error: function(result) {
 
-                                        setTimeout(function(){
-                                            swal("Aluguer não Concluido!");
-                                        }, 2000);
-
                                     },
                                 })
-
-
-
 
                             });
 
 
                 }else{
                     alert("Não está logado");
-
-
+                    // similar behavior as clicking on a link
+                    window.location.href = "http://localhost:8000/login";
                 }
             },
             error: function(result) {
-                //alert("Olass");
 
             },
         })

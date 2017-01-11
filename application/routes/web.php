@@ -231,7 +231,7 @@ Route::post('/ordernew',function(){
     $horas=\Illuminate\Support\Facades\Input::get('hora');
 
     if(Auth::user()){
-        $infocampo = DB::table('campos')->where('nome', '=', "Cucu")->get();
+        $infocampo = DB::table('campos')->where('nome', '=', $camp)->get();
 
         return Response::json(array(
             'success' => true,
@@ -256,20 +256,28 @@ Route::post('/makereserv',function(){
     $horas=\Illuminate\Support\Facades\Input::get('hora');
     $price=\Illuminate\Support\Facades\Input::get('preco');
     $user= Auth::user();
+    $var= App\Aluguer::where('date',$date)->where('hora',$horas)->where('campo',$camp)->get();
 
-    Aluguer::create([
-        'user_id' => $user->id,
-        'campo' => $camp,
-        'date' => $date,
-        'hora' => $horas,
-        'price' => $price,
-        'ref' => bcrypt($date),
-    ]);
+    if ($var->isEmpty()) {
+        Aluguer::create([
+            'user_id' => $user->id,
+            'campo' => $camp,
+            'date' => $date,
+            'hora' => $horas,
+            'price' => $price,
+            'ref' => bcrypt($date),
+        ]);
 
+        return Response::json(array(
+            'success' => true,
+        ));
+
+    }
 
     return Response::json(array(
-        'success' => true,
+        'success' => false,
     ));
+
 
 
 
@@ -279,15 +287,16 @@ Route::get('/meusalugueres',function (){
     $user= Auth::user();;
     $id= $user->id;
     $customer = App\User::find($id);
-echo $compras= $customer->aluguers;
-    foreach ($compras as $compra){
-        echo $compra->user_id;
+    $compras= $customer->aluguers;
+
+
+    foreach($compras as $compra){
+        echo "<pre>";
+        echo $compra;
+        echo "</pre>";
     }
 
 
-    $var= App\Aluguer::where('date','2017-01-31')->where('hora','23:00')->get();
-
-echo $var;
 });
 
 
