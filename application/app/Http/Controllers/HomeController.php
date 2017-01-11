@@ -34,8 +34,9 @@ class HomeController extends Controller
         echo "<pre>";
         print_r($data);
         echo "</pre>";*/
-       // echo $data['name'];
+
             $data = $request->all();
+            die( $data['contact']);
             User::create([
             'name' => $data['name'],
                 'contact' => $data['contact'],
