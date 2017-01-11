@@ -55,6 +55,9 @@
                                 <button type="submit" class="btn btn-primary">
                                     Login
                                 </button>
+                                <button onclick="location.href = '/auth/facebook';" class="btn btn-primary" value="Login  Facebook">Login Facebook
+                                    </button>
+
 
                                 <a class="btn btn-link" href="{{ url('/password/reset') }}">
                                     Forgot Your Password?
@@ -70,3 +73,6 @@
 <script>document.cookie="username=";</script>
 
 @endsection
+
+
+

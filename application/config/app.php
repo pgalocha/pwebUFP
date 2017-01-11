@@ -163,6 +163,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -231,6 +232,7 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'Html'=> Collective\Html\HtmlServiceProvider::class,
         'Form' => Collective\Html\FormFacade::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 
 
     ],

@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
     <link href="/css/Style.css" rel="stylesheet">
     <link href="/css/videofilesoya.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -18,7 +17,6 @@
 </head>
 
 <body>
-
 
 <div class="sect sectOne" id="homeSection" >
     <div class="background-wrap">
@@ -33,8 +31,28 @@
 
         <label class="col-md-4 control-label" for="singlebutton"></label>
         <div class="col-md-4 text-center">
+            @if(!Auth::user())
+            <button onclick="location.href = '/home';" id="loginbtn" name="singlebutton" class="btn btn-danger"> Login</button>
+            @endif
+            @if(Auth::user())
+                    <a href="{{ url('/logout') }}"
+                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();"><span class="glyphicon glyphicon-log-out"></span>
+                        Logout
+                    </a>
+
+
+
+                    <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                        {{ csrf_field() }}
+                    </form>
+                @endif
             <button onclick="demoVisibility()" id="aluguer" name="singlebutton" class="btn btn-primary"> Alugar Campo</button>
+
         </div>
+
+
+
     </div>
 
 
@@ -84,10 +102,18 @@
 
 
 </div>
-<div class="sect SectThree" id="we" ></div>
+<div class="sect SectThree" id="we" >
+
+
+
+
+</div>
 <div class="subSection Footer" id="footerSection" >
 
     <div class="container">
+
+
+
         <p class="float-xs-right">
             <br>
             <br>
@@ -208,7 +234,6 @@
 <script>
     function aluga(){
         var token='{{Session::token()}}';
-        alert("carregaste em mim");
         var camponome = $('#campo').find(":selected").text();
         var date=document.getElementById("datetimepicker").value;
         // alert(date);
@@ -274,7 +299,7 @@
 
                 }else{
                     alert("Não está logado");
-                    console.log("Loga-te");
+
 
                 }
             },

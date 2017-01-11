@@ -12,7 +12,7 @@
 use Illuminate\Http\Request;
 use App\User;
 use App\Order;
-
+use App\Aluguer;
 
 Event::listen('404',function (){
     return Response::error('404');
@@ -25,8 +25,17 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('/home/user/new','HomeController@teste');
 });
 
-
 Route::get('/', function () {
+    $cidades = DB::table('cidade')->get();
+    //print_r($cidades['0']);
+    //$cidade=$cidades['0'];
+    //  echo $cidade->id;
+    return View::make('principal')->with('cidades',$cidades);
+    //return view('principal');
+});
+
+
+Route::get('/s', function () {
     $cidades = DB::table('cidade')->get();
     //print_r($cidades['0']);
     //$cidade=$cidades['0'];
@@ -116,10 +125,18 @@ Route::get('testevideo',function(){
 Auth::routes();
 Route::get('/home', 'HomeController@index');
 Route::get('/home' ,function(){
+
+    if (Auth::guest()){
+        return redirect('/login');
+    }
+
     if( Auth::user()->isAdmin()){
         return view('/admin');
     }
-    return view('/home');
+    if(Auth::user()){
+        return view('/home');
+    }
+
 });
 Route::get('/registuser','HomeController@regist');
 Route::get('/form',['middleware' => 'admin' ,function(){
@@ -177,12 +194,14 @@ Route::get('/outra',function(){
 
 
 
+
 Route::post('/schedule',function(Request $request){
    // echo \Illuminate\Support\Facades\Input::get('date');
     $date=\Illuminate\Support\Facades\Input::get('date');
     $campo=\Illuminate\Support\Facades\Input::get('campo');
+    $hora=\Illuminate\Support\Facades\Input::get('hora');
+    $var= App\Aluguer::where('date',$date)->where('hora',$hora)->where('campo',$campo)->get();
 
-   $var= App\Order::where('date',$date)->get();
 
     if ($var->isEmpty()) {
         return Response::json(array(
@@ -236,7 +255,17 @@ Route::post('/makereserv',function(){
     $camp=\Illuminate\Support\Facades\Input::get('campo');
     $horas=\Illuminate\Support\Facades\Input::get('hora');
     $price=\Illuminate\Support\Facades\Input::get('preco');
-    $id= Auth::user()->id;
+    $user= Auth::user();
+
+    Aluguer::create([
+        'user_id' => $user->id,
+        'campo' => $camp,
+        'date' => $date,
+        'hora' => $horas,
+        'price' => $price,
+        'ref' => bcrypt($date),
+    ]);
+
 
     return Response::json(array(
         'success' => true,
@@ -245,3 +274,23 @@ Route::post('/makereserv',function(){
 
 
 });
+Route::get('/meusalugueres',function (){
+   //echo $orders= App\Aluguer::all();
+    $user= Auth::user();;
+    $id= $user->id;
+    $customer = App\User::find($id);
+echo $compras= $customer->aluguers;
+    foreach ($compras as $compra){
+        echo $compra->user_id;
+    }
+
+
+    $var= App\Aluguer::where('date','2017-01-31')->where('hora','23:00')->get();
+
+echo $var;
+});
+
+
+
+Route::get('auth/{provider}', 'Auth\RegisterController@redirectToProvider');
+Route::get('auth/{provider}/callback', 'Auth\RegisterController@handleProviderCallback');

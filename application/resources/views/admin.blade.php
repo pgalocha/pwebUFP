@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+@extends('layouts.app')
+
+<script src="/js/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/sweetalert.css">
+@section('content')
 
 <html lang="en">
 <head>
@@ -80,6 +85,7 @@
             <a href="/home/user/new">Add NewUser</a>
             <a href="/home/user">Edit User</a>
         </div>
+
     </div>
 </div>
 
