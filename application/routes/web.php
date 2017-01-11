@@ -144,6 +144,9 @@ Route::get('/form',['middleware' => 'admin' ,function(){
 
 //Route::post('/user/new','Auth\RegisterController@create');
 Route::get('/home/user',['middleware' => 'admin' ,function(){
+    Cache::put('foo',App\User::paginate(10));
+    $cache = Cache::get('foo');
+    echo $cache;
     return view('listar')->with('users', App\User::paginate(10));
 }]);
 Route::get('/hi' ,function(Request $request ){
@@ -270,12 +273,9 @@ Route::post('/makereserv',function(){
         ));
 
     }
-
     return Response::json(array(
         'success' => false,
     ));
-
-
 
 
 });

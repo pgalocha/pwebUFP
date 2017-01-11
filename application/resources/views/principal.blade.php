@@ -205,15 +205,13 @@
     $("#cidade").on('change',function (e) {
         $( "#fotoSection" ).remove();
         $("#aluguerSection").append('<div id="fotoSection"></div>');
-        console.log(e);
         var cid_id= e.target.value;
-        console.log(cid_id);
         //ajax
         $.get('cidade?cid_id='+ cid_id, function (data) {
             $("#campo").empty();
-            console.log(data);
+
             $.each(data,function(index, subObj){
-                console.log(subObj+"ola");
+
                 $("#campo").append(' <option value="'+subObj.id+'">'+subObj.nome+'</option>');
 
 

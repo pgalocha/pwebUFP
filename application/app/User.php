@@ -27,6 +27,10 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function aluguers(){
+        return $this->hasMany('App\Aluguer');
+    }
+
     public function isAdmin()
     {
         return $this->admin ? true : false;
@@ -35,9 +39,7 @@ class User extends Authenticatable
     public function orders(){
         return $this->hasMany('App\Order');
     }
-    public function aluguers(){
-        return $this->hasMany('App\Aluguer');
-    }
+
 
     public function socialProviders(){
         return $this->hasMany('App\SocialProvider');
