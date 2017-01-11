@@ -27,11 +27,8 @@ Route::group(['middleware' => 'admin'], function () {
 
 Route::get('/', function () {
     $cidades = DB::table('cidade')->get();
-    //print_r($cidades['0']);
-    //$cidade=$cidades['0'];
-    //  echo $cidade->id;
     return View::make('principal')->with('cidades',$cidades);
-    //return view('principal');
+
 });
 
 

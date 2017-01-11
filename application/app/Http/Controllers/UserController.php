@@ -75,10 +75,6 @@ class UserController extends Controller
     }
 
     public function update_info_adm(Request $request){
-        // print_r($request);
-        //echo $request['contact'];
-        // echo $request['name'];
-        //echo $request['id'];
         $this->validate($request, [
             'contact' => 'required|max:9|min:9',
             'name' => 'required|max:255|min:1',
