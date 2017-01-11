@@ -20,4 +20,4 @@ This is the repo for my implementation of a WEB app and it's respective content.
  
  
  
-<img src="http://image.prntscr.com/image/4e3fa9cce97344fbb2bec7fabe0cbc45.png" alt="picture" height="460" width="620">
+<img src="http://image.prntscr.com/image/4e3fa9cce97344fbb2bec7fabe0cbc45.png" alt="picture" height="460" width="820">
