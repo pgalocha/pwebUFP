@@ -10,6 +10,9 @@ use Image;
 use File;
 use App\User as User;
 
+use Illuminate\Support\Facades\Hash;
+
+
 
 
 class UserController extends Controller
@@ -104,20 +107,14 @@ class UserController extends Controller
 
         echo bcrypt($request['password_old']);
 
-        if(bcrypt($request['password_old'])== $user->password){
-            $this->validate($request, [
-                'password' => 'required|min:5|confirmed',
-            ]);
-
+        if (Hash::check($request['password_old'],$user->password))
+        {
+            $user->password=bcrypt($request['password']);
+            $user->save();
+            return view('/home');
+        }else{
+            return view('/home');
         }
-        else {
-
-            die('password antiga nao corresponde!');
-        }
-
-
-
-
 
     }
 

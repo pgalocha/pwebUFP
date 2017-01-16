@@ -136,6 +136,8 @@ Route::get('/home' ,function(){
 
 });
 Route::get('/registuser','HomeController@regist');
+
+
 Route::get('/form',['middleware' => 'admin' ,function(){
     if( Auth::user()->isAdmin()){
         return view('form');
